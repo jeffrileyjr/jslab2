@@ -35,6 +35,13 @@ class AddressBook {
       console.log(`Name: ${this.contacts[i].name} Email: ${this.contacts[i].email} Phone: ${this.contacts[i].phone} relation: ${this.contacts[i].relation}`)
     }
   }
+  deleteByName(name) {
+    for (let i = 0; i < this.contacts.length; i++) {
+      if (name === this.contacts[i].name) {
+        this.contacts.splice(i, 1);
+      }
+    }
+  }
 }
 
 class Contact {
@@ -59,9 +66,15 @@ while (true) {
       relation: prompt(`What is contacts's relation?`),
     };
     addressBook.add(info);
-      } else if (userChoice === "delete") {
-    let index = prompt(`Which index between 0 and ${addressBook.contacts.length - 1} would you like to delete?`);
-    addressBook.deleteAt(index);
+  } else if (userChoice === "delete") {
+    let deleteChoice = prompt(`Would you like to delete by index or name?`);
+    if (deleteChoice === "index") {
+      let index = prompt(`Which index between 0 and ${addressBook.contacts.length - 1} would you like to delete?`);
+      addressBook.deleteAt(index);
+    } else if (deleteChoice === "name") {
+      let name = prompt(`What contact would you like to remove?`);
+      addressBook.deleteByName(name);
+    }
   } else if (userChoice === "print") {
     addressBook.print();
   } else if (userChoice === "quit") {
