@@ -38,6 +38,7 @@ class AddressBook {
   deleteByName(name) {
     for (let i = 0; i < this.contacts.length; i++) {
       if (name === this.contacts[i].name) {
+        console.log(`${this.contacts[i].name} will be deleted.`);
         this.contacts.splice(i, 1);
       }
     }
